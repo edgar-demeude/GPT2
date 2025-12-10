@@ -1,0 +1,16 @@
+name: mini-gpt2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - numpy
+  - pandas
+  - matplotlib
+  - pip
+  - pip:
+      - tiktoken
+      - jupyter

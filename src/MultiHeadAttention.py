@@ -1,5 +1,4 @@
 import torch
-import torch.nn as nn
 import math
 
 class MultiHeadAttention(torch.nn.Module):
@@ -61,3 +60,4 @@ class MultiHeadAttention(torch.nn.Module):
         if squeezed:
             return out.squeeze(0)
         return out
+    
