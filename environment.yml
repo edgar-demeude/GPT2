@@ -9,6 +9,7 @@ dependencies:
   - torchaudio
   - numpy
   - pandas
+  - tensorflow
   - matplotlib
   - pip
   - pip:
