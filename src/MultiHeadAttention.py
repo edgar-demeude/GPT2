@@ -2,7 +2,7 @@ import torch
 import math
 
 class MultiHeadAttention(torch.nn.Module):
-    def __init__(self, input_dim, d_out=2, num_head=2, dropout=0.0):
+    def __init__(self, input_dim, d_out=2, num_head=2, dropout=0.0, qkv_bias=False, out_bias=False):
         super().__init__()
         assert d_out % num_head == 0 # d_out must be divisible by num_head
         self.d_out = d_out
@@ -11,12 +11,12 @@ class MultiHeadAttention(torch.nn.Module):
         self.attn_dropout = torch.nn.Dropout(dropout)
 
         # linear projections for query, key and value
-        self.W_query = torch.nn.Linear(input_dim, d_out, bias=False)
-        self.W_key = torch.nn.Linear(input_dim, d_out, bias=False)
-        self.W_value = torch.nn.Linear(input_dim, d_out, bias=False)
+        self.W_query = torch.nn.Linear(input_dim, d_out, bias=qkv_bias)
+        self.W_key = torch.nn.Linear(input_dim, d_out, bias=qkv_bias)
+        self.W_value = torch.nn.Linear(input_dim, d_out, bias=qkv_bias)
 
         # output projection to combine heads
-        self.out_proj = torch.nn.Linear(d_out, d_out, bias=False)
+        self.out_proj = torch.nn.Linear(d_out, d_out, bias=out_bias)
 
     def forward(self, x):
         # x: (T, D) or (B, T, D) -> returns (T, d_out) or (B, T, d_out)

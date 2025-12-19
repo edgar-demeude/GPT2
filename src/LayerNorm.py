@@ -13,3 +13,4 @@ class LayerNorm(nn.Module):
         variance = x.var(dim=-1, keepdim=True, unbiased=False)  # Variance par ligne (batch)
         output = self.scale * ((x - mean) / (torch.sqrt(variance) + self.eps)) + self.shift
         return output
+    

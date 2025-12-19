@@ -17,9 +17,10 @@ class TransformerBlock(nn.Module):
         self.n_layers = config["n_layers"]
         self.drop_rate = config["drop_rate"]
         self.qkv_bias = config["qkv_bias"]
+        self.out_bias = config["out_bias"]
 
         self.layerNorm1 = LayerNorm(self.emb_dim)
-        self.mha = MultiHeadAttention(self.emb_dim, self.emb_dim, self.n_heads, self.drop_rate)
+        self.mha = MultiHeadAttention(self.emb_dim, self.emb_dim, self.n_heads, self.drop_rate, self.qkv_bias, self.out_bias)
         self.dropout1 = nn.Dropout(self.drop_rate)
         
         self.layerNorm2 = LayerNorm(self.emb_dim)

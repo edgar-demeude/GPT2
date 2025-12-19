@@ -17,9 +17,10 @@ class GPTModel(nn.Module):
         self.n_layers = config["n_layers"]
         self.drop_rate = config["drop_rate"]
         self.qkv_bias = config["qkv_bias"]
+        self.out_bias = config["out_bias"]
 
         self.token_embedding = nn.Embedding(self.vocab_size, self.emb_dim) # 50257 * 768 = 38,605,056
-        self.pos_embedding_layer = nn.Embedding(self.context_length, self.emb_dim) # 1024 * 768 = 786,432
+        self.pos_embedding_layer = torch.nn.Embedding(self.context_length, self.emb_dim) # 1024 * 768 = 786,432
 
         self.dropout = nn.Dropout(self.drop_rate)
 
